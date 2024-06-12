@@ -1,10 +1,15 @@
-local base = require("plugins.lspconfig-base")
-local on_attach = base.on_attach
-local capabilities = base.capabilities
+if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
+
+local on_attach = require("plugins.configs.lspconfig").on_attach
+local capabilities = require("plugins.configs.lspconfig").capabilities
 
 local lspconfig = require("lspconfig")
 
-lspconfig.eslint.setup({
-  on_attach = on_attach,
-  capabilities = capabilities,
-})
+local servers = {"tsserver", "tailwindcss", "eslint"}
+
+for _, lsp in ipairs(servers) do
+  lspconfig[lsp].setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+  }
+end
